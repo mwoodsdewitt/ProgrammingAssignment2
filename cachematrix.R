@@ -1,15 +1,38 @@
-## Put comments here that give an overall description of what your
-## functions do
+## R Programming Week 3
+## Programming Assignment 2: Lexical Scoping 
+## Matrix inversion is usually a computationally costly undertaking 
+## there may be significant benefit to caching the inverse of the matrix rather than
+## computing it repeatedly
+## The functions below accomplish this task in two stages
 
-## Write a short comment describing this function
-
+## Stage 1 calculation
+## Stage 1 creates creates a special "matrix" object that can cache its inverse
 makeCacheMatrix <- function(x = matrix()) {
-
+                   initial <- NULL
+                   setup <- function(y) {
+                          x <<-y
+                          initial <<-NULL
+                   }
+                   Return <- function () x
+                   setup_inverse <- function(inverse) initial <<- inverse
+                   Return_inverse <- function() initial
+                   list(setup = setup, Return = Return, setup_inverse = setup_inverse,Return_inverse=Return_inverse)
+  
 }
 
 
-## Write a short comment describing this function
-
+## Stage 2 calculation
+## Stage 2 computes the inverse of the special "matrix" returned by makeCacheMatrix above
+## Note If the inverse has already been calculated (and the matrix has not changed)
+## then the cachesolve should retrieve the inverse from the cache.
+## Return a matrix that is the inverse of 'x'
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+              initial <- x$Return_inverse()
+              if (!is.null(initial)) {
+                return(initial)
+              }
+              Matrix <- x$Return()
+              initial <- solve(Matrix,...)
+              x$setup_inverse(initial)
+              initial
 }
