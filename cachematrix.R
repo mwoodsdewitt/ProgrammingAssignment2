@@ -1,4 +1,4 @@
-## R Programming Week 3
+## R Programming Week 3:Mike Woods-DeWitt
 ## Programming Assignment 2: Lexical Scoping 
 ## Matrix inversion is usually a computationally costly undertaking 
 ## there may be significant benefit to caching the inverse of the matrix rather than
@@ -22,9 +22,8 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 ## Stage 2 calculation
-## Stage 2 computes the inverse of the special "matrix" returned by makeCacheMatrix above
-## Note If the inverse has already been calculated (and the matrix has not changed)
-## then the cachesolve should retrieve the inverse from the cache.
+## Stage 2 computes the inverse of the special "matrix" returned in Stage 1 above
+## Note If the inverse has already been calculated (and/or the matrix has not changed) then the cachesolve should retrieve the inverse from the cache.
 ## Return a matrix that is the inverse of 'x'
 cacheSolve <- function(x, ...) {
               initial <- x$Return_inverse()
